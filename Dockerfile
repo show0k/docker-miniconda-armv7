@@ -24,4 +24,4 @@ RUN [ "cross-build-end" ]
 
 ENV PATH /opt/conda/bin:$PATH
 
-CMD ["/bin/bash"]
+RUN [ "qemu-arm-static", "/bin/sh", "-c", "ln -s resin-xbuild /usr/bin/cross-build-start; ln -s resin-xbuild /usr/bin/cross-build-end; ln /bin/sh /bin/sh.real" ]
