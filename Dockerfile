@@ -1,8 +1,8 @@
 FROM resin/rpi-raspbian
 MAINTAINER Théo Segonds <theo.segonds@inria.fr>
 
-
-RUN apt-get update --fix-missing && apt-get install -y wget bzip2 ca-certificates \
+RUN apt-get update --fix-missing
+RUN apt-get install -y wget bzip2 ca-certificates \
     libglib2.0-0 libxext6 libsm6 libxrender1 \
     git mercurial subversion
 
