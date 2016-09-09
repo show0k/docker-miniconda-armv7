@@ -1,0 +1,8 @@
+sudo: required
+
+services:
+  - docker
+
+script:
+  - docker pull docker-rpi-raspbian-qemu
+  - docker run -it docker-rpi-raspbian-qemu uname -a

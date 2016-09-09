@@ -12,8 +12,6 @@ RUN apt-get update --fix-missing && apt-get install -y --no-install-recommends \
 	bzip2 \
 	ca-certificates \
     git \
-    mercurial \
-    subversion \
     && rm -rf /var/lib/apt/lists/*
 
 RUN echo 'export PATH=/opt/conda/bin:$PATH' > /etc/profile.d/conda.sh && \
