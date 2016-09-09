@@ -1,0 +1,9 @@
+machine:
+  services:
+    - docker
+
+dependencies:
+  override:
+    - docker info
+    - docker build .
+    - docker run -rm -ti show0k/miniconda-armv7
