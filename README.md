@@ -1,19 +1,12 @@
 # docker-miniconda-armv7
 [![](http://dockeri.co/image/show0k/miniconda-armv7)](https://hub.docker.com/r/show0k/miniconda-armv7/)
 
-Image used to build linux-armv7 conda package on ARM or x64 hardware.
+Image used to build linux-armv7 conda packages on x64 or ARM hardware. It **doesn't need** to install qemu on the host (see below for more informations). 
 
-## To run on x64 hardware:
-### OSX
-Docker app integrate a VM and qemu-arm-static.
+The image is based on resin/armv7hf-debian-qemu with a [modified version of qemu](https://github.com/resin-io/qemu) which allow building the image without binfmt_misc kernel suport (look at [this post](https://resin.io/blog/building-arm-containers-on-any-x86-machine-even-dockerhub/) for more informations).
 
-```docker pull show0k/miniconda-armv7```
-```docker run -it show0k/miniconda-armv7```
 
-### GNU/Linux
-You have to install qemu-arm-static :
-```sudo apt-get install qemu-arm-static```
+The image include the standard qemu-arm-static in /usr/bin/.  You can run this image without modification in OSX Docker machine, in x64 Linux, and in armv7 Linux in the same way.
 
-```docker pull show0k/miniconda-armv7```
-```docker run -it /usr/bin/qemu-arm-static:/usr/bin/qemu-arm-static show0k/miniconda-armv7```
-
+To test it :
+`docker run -it show0k/miniconda-armv7 /bin/sh`
