@@ -1,4 +1,5 @@
-FROM resin/rpi-raspbian
+FROM resin/armv7hf-debian
+
 MAINTAINER Théo Segonds <theo.segonds@inria.fr>
 
 
