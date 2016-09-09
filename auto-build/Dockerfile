@@ -1,10 +1,13 @@
-FROM resin/armv7hf-debian-qemu
-
+FROM resin/rpi-raspbian
 MAINTAINER Théo Segonds <theo.segonds@inria.fr>
 
-RUN [ "cross-build-start" ]
-ENV LANG C.UTF-8
 
+ENV QEMU_EXECVE 1
+COPY qemu/cross-build-end qemu/cross-build-start qemu/sh-shim /usr/bin/
+COPY qemu/qemu-arm-static-modified /usr/bin/qemu-arm-static
+
+RUN [ "cross-build-start" ]
+ENV LC_ALL=C.UTF-8
 
 RUN apt-get update --fix-missing && apt-get install -y --no-install-recommends \
 	wget \
@@ -24,4 +27,4 @@ RUN [ "cross-build-end" ]
 
 ENV PATH /opt/conda/bin:$PATH
 
-COPY qemu-arm-static /usr/bin/qemu-arm-static
+COPY qemu/qemu-arm-static-original /usr/bin/qemu-arm-static
