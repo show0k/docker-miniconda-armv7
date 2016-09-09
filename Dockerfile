@@ -24,4 +24,5 @@ RUN [ "cross-build-end" ]
 
 ENV PATH /opt/conda/bin:$PATH
 
-RUN ["/bin/sh"]
+
+RUN [ "/usr/bin/qemu-arm-static", "/bin/sh" ]
