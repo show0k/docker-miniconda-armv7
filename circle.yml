@@ -6,9 +6,9 @@ machine:
 
 dependencies:
   override:
-    - docker info
-    - docker pull show0k/miniconda-armv7  
+    - docker info 
 
 test:
   override:
-    - docker run -ti show0k/miniconda-armv7 uname -a
+    - docker run --rm --privileged multiarch/qemu-user-static:register --reset
+    - docker run -it --rm multiarch/ubuntu-debootstrap:armhf-wily uname -a
