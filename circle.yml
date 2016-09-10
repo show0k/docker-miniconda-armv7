@@ -5,7 +5,7 @@ machine:
 dependencies:
   override:
     - docker info
-    - docker build .
+    - docker pull show0k/miniconda-armv7
 
 test:
   override:
