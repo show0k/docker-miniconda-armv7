@@ -5,8 +5,8 @@ machine:
 dependencies:
   override:
     - docker info
-    - docker pull show0k/miniconda-armv7
+    - docker pull show0k/miniconda-armv7  
 
 test:
   override:
-    - docker run --rm -ti show0k/miniconda-armv7 uname -a
+    - docker run -ti show0k/miniconda-armv7 uname -a
