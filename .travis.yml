@@ -6,8 +6,7 @@ services:
 install: true
 
 before_script:
-  - docker pull show0k/miniconda-armv7
+  - docker info
 script:
-  
   - docker run -it show0k/miniconda-armv7 /bin/uname -a
 
