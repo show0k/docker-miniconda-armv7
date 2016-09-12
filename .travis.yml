@@ -11,6 +11,4 @@ before_script:
   - docker pull show0k/miniconda-armv7
 script:
   
-  - docker run -it monsendag/rpi-raspbian-qemu uname -a
-  - make build
-  - docker run -it monsendag/rpi-raspbian-qemu uname -a
+  - docker run -it show0k/miniconda-armv7 uname -a
