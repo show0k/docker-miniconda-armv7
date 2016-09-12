@@ -9,5 +9,5 @@ before_script:
   - docker pull show0k/miniconda-armv7
 script:
   
-  - docker run -it show0k/miniconda-armv7 uname -a
+  - docker run -it show0k/miniconda-armv7 /bin/uname -a
 

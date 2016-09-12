@@ -9,4 +9,4 @@ dependencies:
     - docker info
 test:
   override:
-    - docker run -it show0k/miniconda-armv7 uname -a
+    - docker run -it show0k/miniconda-armv7 /bin/uname -a
