@@ -1,7 +1,7 @@
 # Miniconda armv7 crossbuild
 [![Build Status](https://travis-ci.com/show0k/docker-miniconda-armv7.svg?token=q6kB4mpCcVGt4S3NTy9e&branch=master)](https://travis-ci.com/show0k/docker-miniconda-armv7)
-[![CircleCI](https://circleci.com/gh/show0k/docker-miniconda-armv7.svg?style=svg)](https://circleci.com/gh/show0k/docker-miniconda-armv7)
-[![](https://images.microbadger.com/badges/image/show0k/miniconda-armv7.svg)](http://microbadger.com/images/show0k/miniconda-armv7 "Get your own image badge on microbadger.com")
+[![CircleCI](https://circleci.com/gh/show0k/docker-miniconda-armv7.png?&style=shield)](https://circleci.com/gh/show0k/docker-miniconda-armv7)
+[![](https://images.microbadger.com/badges/image/show0k/miniconda-armv7.svg)](https://hub.docker.com/r/show0k/miniconda-armv7/)
 
 Image used to build linux-armv7 conda packages on x64 hardware. 
 It **doesn't need** to install qemu on the host, nor to have a kernel which support binfmt_misc.
