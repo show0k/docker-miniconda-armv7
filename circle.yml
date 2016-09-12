@@ -7,10 +7,12 @@ machine:
 dependencies:
   override:
     - docker info
-    - sudo apt-get --yes --no-install-recommends install binfmt-support qemu-user-static
+    - sudo apt-get update && sudo apt-get--yes --no-install-recommends install binfmt-support qemu-user-static
     - echo ':arm:M::\x7fELF\x01\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\x28\x00:\xff\xff\xff\xff\xff\xff\xff\x00\xff\xff\xff\xff\xff\xff\xff\xff\xfe\xff\xff\xff:/usr/bin/qemu-arm-static:' | sudo tee -a /proc/sys/fs/binfmt_misc/register 
 
 test:
   override:
-    - docker run --rm --privileged multiarch/qemu-user-static:register --reset
-    - docker run -it --rm multiarch/ubuntu-debootstrap:armhf-wily uname -a
+    - make build
+    - docker run --privileged moul/binfmt-register > qemu-arm-static
+    - chmod +x qemu-arm-static
+    - docker run -it -v $(pwd)/qemu-arm-static:/usr/local/bin/qemu-arm-static armbuild/ubuntu:trusty bash
