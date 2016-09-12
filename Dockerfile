@@ -14,11 +14,11 @@ RUN [ "qemu-arm-static", "/bin/sh", "-c", "ln -s resin-xbuild /usr/bin/cross-bui
 RUN [ "cross-build-start" ]
 
 RUN apt-get update --fix-missing && apt-get install -y --no-install-recommends \
-	wget \
-	curl \
+	wget curl \
 	bzip2 \
 	ca-certificates \
-    git \
+    git mercurial subversion \
+    libglib2.0-0 libxext6 libsm6 libxrender1 \
     && rm -rf /var/lib/apt/lists/*
 
 RUN echo 'export PATH=/opt/conda/bin:$PATH' > /etc/profile.d/conda.sh && \
