@@ -57,5 +57,6 @@ ENV PATH /opt/conda/bin:$PATH
 
 RUN [ "cross-build-end" ] 
 
-ENTRYPOINT [ "/usr/bin/qemu-arm-static", "/bin/sh -c"]
+ENTRYPOINT [ "/usr/bin/qemu-arm-static" ]
+CMD [ "/bin/sh" ]
 
