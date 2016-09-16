@@ -41,6 +41,8 @@ RUN curl -s -L http://repo.continuum.io/miniconda/Miniconda3-3.16.0-Linux-armv7l
     conda config --add channels conda-forge && \
     conda config --add channels poppy-project && \
     conda update --all --yes && \
+    conda install conda-build && \
+    conda install anaconda-client && \
 	conda clean -tipy
 
 ENV PATH /opt/conda/bin:$PATH
