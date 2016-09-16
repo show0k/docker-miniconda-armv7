@@ -54,17 +54,16 @@ ENV PATH /opt/conda/bin:$PATH
 #    conda clean -tipsy
 
 # Install conda-forge git. -> not available in linux-armV7
-# RUN export PATH="/opt/conda/bin:${PATH}" && \
-#    conda install --yes git && \
-# conda clean -tipsy
+RUN export PATH="/opt/conda/bin:${PATH}" && \
+    conda install --yes jinja2 && \
+    conda config --set anaconda_upload yes && \
+    conda config --set use_pip false && conda config --set show_channel_urls true && \
+
+    #conda install --yes git && \
+ conda clean -tipsy
 
 RUN [ "cross-build-end" ] 
 
-# Add a file for users to source to activate the `conda`
-# environment `root` and the devtoolset compiler. Also
-# add a file that wraps that for use with the `ENTRYPOINT`.
-COPY entrypoint/entrypoint_source /opt/docker/bin/entrypoint_source
-COPY entrypoint/entrypoint /opt/docker/bin/entrypoint
 
 ENTRYPOINT [ "/usr/bin/qemu-arm-static", "/usr/bin/env", "QEMU_EXECVE=1" ]
 CMD [ "/bin/bash" ]
