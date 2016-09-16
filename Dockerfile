@@ -5,7 +5,7 @@ MAINTAINER Théo Segonds <theo.segonds@inria.fr>
 ENV QEMU_EXECVE 1
 
 # Add a timestamp for the build. Also, bust the cache.
-ADD http://www.timeapi.org/utc/now /opt/docker/etc/timestamp
+# ADD http://www.timeapi.org/utc/now /opt/docker/etc/timestamp
 
 # Modified version of qemu https://github.com/resin-io/qemu
 # Highly inspired from https://github.com/resin-io-projects/armv7hf-debian-qemu
@@ -39,6 +39,7 @@ RUN curl -s -L http://repo.continuum.io/miniconda/Miniconda3-3.16.0-Linux-armv7l
     export PATH=/opt/conda/bin:$PATH && \
     conda config --set show_channel_urls True && \
     conda config --add channels conda-forge && \
+    conda config --add channels poppy-project && \
     conda update --all --yes && \
 	conda clean -tipy
 
@@ -57,6 +58,13 @@ ENV PATH /opt/conda/bin:$PATH
 
 RUN [ "cross-build-end" ] 
 
-ENTRYPOINT [ "/usr/bin/qemu-arm-static" ]
-CMD [ "/bin/sh" ]
+# Add a file for users to source to activate the `conda`
+# environment `root` and the devtoolset compiler. Also
+# add a file that wraps that for use with the `ENTRYPOINT`.
+COPY entrypoint/entrypoint_source /opt/docker/bin/entrypoint_source
+COPY entrypoint/entrypoint /opt/docker/bin/entrypoint
+
+ENTRYPOINT [ "/usr/bin/qemu-arm-static", "/usr/bin/env", "QEMU_EXECVE=1" ]
+CMD [ "/bin/bash" ]
+
 
