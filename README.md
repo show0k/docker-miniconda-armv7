@@ -27,7 +27,7 @@ You have to override the entrypoint of qemu
 `docker run -it --rm --entrypoint=/bin/bash show0k/miniconda-armv7`
 
 ## Continuous integration support
-It works on Travis Ci and CircleCi ! Look at [https://github.com/show0k/docker-miniconda-armv7/blob/master/.travis.yml](.travis.yml) or [https://github.com/show0k/docker-miniconda-armv7/blob/master/circle.yml](circle.yml) to have basic ci examples.
+It works on Travis Ci and CircleCi ! Look at [.travis.yml](https://github.com/show0k/docker-miniconda-armv7/blob/master/.travis.yml) or [circle.yml](https://github.com/show0k/docker-miniconda-armv7/blob/master/circle.yml) to have basic ci examples.
 
 ## Docker build based on this image
 Wrap your build steps to taint the environment with qemu allowing building on x86_64.
