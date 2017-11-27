@@ -1,4 +1,4 @@
-FROM resin/rpi-raspbian
+FROM resin/armv7hf-debian
 
 MAINTAINER Théo Segonds <theo.segonds@inria.fr>
 
@@ -21,7 +21,7 @@ RUN apt-get update --fix-missing && apt-get install -y --no-install-recommends \
 	wget curl \
 	bzip2 tar unzip \
 	ca-certificates \
-    libglib2.0-0 libxext6 libsm6 libxrender1 
+    libglib2.0-0 libxext6 libsm6 libxrender1
 
 # Compilation
 RUN apt-get install -y --no-install-recommends build-essential \
@@ -35,37 +35,28 @@ RUN apt-get install -y --no-install-recommends build-essential \
 RUN curl -s -L http://repo.continuum.io/miniconda/Miniconda3-3.16.0-Linux-armv7l.sh > miniconda.sh && \
     openssl md5 miniconda.sh | grep a01cbe45755d576c2bb9833859cf9fd7 && \
     bash miniconda.sh -b -p /opt/conda && \
-    rm miniconda.sh && \
-    export PATH=/opt/conda/bin:$PATH && \
+    rm miniconda.sh
+
+RUN export PATH="/opt/conda/bin:${PATH}" && \
     conda config --set show_channel_urls True && \
-    conda config --add channels conda-forge && \
-    conda config --add channels poppy-project && \
+		conda config --add channels rpi && \
     conda update --all --yes && \
+		conda install -y python=3.6 -c rpi && \
     conda install conda-build && \
     conda install anaconda-client && \
-	conda clean -tipy
+		conda clean -tipsy
 
 ENV PATH /opt/conda/bin:$PATH
-
-# Install Obvious-CI -> not available in linux-armV7
-# RUN export PATH="/opt/conda/bin:${PATH}" && \
-#    conda install --yes obvious-ci && \
-#    obvci_install_conda_build_tools.py && \
-#    conda clean -tipsy
 
 # Install conda-forge git. -> not available in linux-armV7
 RUN export PATH="/opt/conda/bin:${PATH}" && \
     conda install --yes jinja2 && \
     conda config --set anaconda_upload yes && \
     conda config --set use_pip false && conda config --set show_channel_urls true && \
+  	conda clean -tipsy
 
-    #conda install --yes git && \
- conda clean -tipsy
-
-RUN [ "cross-build-end" ] 
+RUN [ "cross-build-end" ]
 
 
 ENTRYPOINT [ "/usr/bin/qemu-arm-static", "/usr/bin/env", "QEMU_EXECVE=1" ]
 CMD [ "/bin/bash" ]
-
-
